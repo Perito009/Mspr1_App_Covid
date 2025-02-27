@@ -7,7 +7,7 @@ import matplotlib.dates as mdates
 df = pd.read_csv('data/df_finale.csv')
 
 # Convert 'Date' column to datetime format
-df['Date'] = pd.to_datetime(df['Date'])
+df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
 
 # Streamlit app title
 st.title('COVID-19 Data Visualization')
