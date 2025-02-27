@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Load the data
-df = pd.read_csv('df_finale.csv')
+df = pd.read_csv('data/df_finale.csv')
 
 # Streamlit app title
 st.title('COVID-19 Data Visualization')
