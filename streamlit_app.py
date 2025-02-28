@@ -16,9 +16,14 @@ st.title('COVID-19 Data Visualization')
 countries = df['Country/Region'].unique()
 selected_country = st.sidebar.selectbox('Select a country', countries)
 
+# # Sidebar for date range selection
+# start_date = st.sidebar.date_input('Start date', df['Date'].min())
+# end_date = st.sidebar.date_input('End date', df['Date'].max())
+
 # Sidebar for date range selection
 start_date = st.sidebar.date_input('Start date', df['Date'].min())
 end_date = st.sidebar.date_input('End date', df['Date'].max())
+
 
 # Sidebar for data type selection
 data_types = ['Deaths', 'Recovered', 'Active']
