@@ -140,7 +140,7 @@ if graph_type == 'Line':
     
     # Formatting axes
     ax.set_xlabel('Date')
-    ax.set_ylabel('Number of Cases')
+    #ax.set_ylabel('Number of Cases')
     ax.set_title(f'COVID-19 Trends in {selected_country}')
     ax.legend()
     
