@@ -26,7 +26,7 @@ end_date = st.sidebar.date_input('End date', df['Date'].max())
 
 
 # Sidebar for data type selection
-data_types = ['Deaths', 'Recovered', 'Active']
+data_types = ['total_confirmed', 'Recovered', 'Active']
 selected_data_types = st.sidebar.multiselect('Select data types', data_types, default=data_types)
 
 # Sidebar for graph type selection
