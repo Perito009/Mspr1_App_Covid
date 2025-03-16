@@ -1,0 +1,227 @@
+openapi: 3.0.0
+info:
+  title: API de Gestion des Données Pandémiques
+  description: API permettant de gérer les données des pandémies pour différents pays.
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1:5000
+    description: Serveur local
+
+paths:
+  /countries:
+    get:
+      summary: Récupérer la liste des pays
+      description: Renvoie la liste des pays enregistrés dans la base de données.
+      responses:
+        '200':
+          description: Liste des pays récupérée avec succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id_country:
+                      type: integer
+                    name:
+                      type: string
+                    continent:
+                      type: string
+                    population:
+                      type: integer
+
+  /data:
+    get:
+      summary: Récupérer les données pandémiques d'un pays
+      description: Renvoie les données pandémiques d'un pays en fonction de son ID.
+      parameters:
+        - name: id_country
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: ID du pays
+      responses:
+        '200':
+          description: Données récupérées avec succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    date:
+                      type: string
+                      format: date
+                    id_country:
+                      type: integer
+                    total_cases:
+                      type: integer
+                    new_cases:
+                      type: integer
+                    total_deaths:
+                      type: integer
+                    new_deaths:
+                      type: integer
+                    total_recovered:
+                      type: integer
+                    active_cases:
+                      type: integer
+                    serious_critical:
+                      type: integer
+                    TrueConfirmed:
+                      type: integer
+                    New_recovered:
+                      type: integer
+        '400':
+          description: Paramètre `id_country` manquant
+
+  /add:
+    post:
+      summary: Ajouter une nouvelle entrée de données
+      description: Ajoute une nouvelle ligne de données pandémiques pour un pays.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                country:
+                  type: string
+                continent:
+                  type: string
+                population:
+                  type: integer
+                date:
+                  type: string
+                  format: date
+                total_cases:
+                  type: integer
+                total_deaths:
+                  type: integer
+                new_cases:
+                  type: integer
+                new_deaths:
+                  type: integer
+                total_recovered:
+                  type: integer
+                active_cases:
+                  type: integer
+                serious_critical:
+                  type: integer
+                TrueConfirmed:
+                  type: integer
+      responses:
+        '201':
+          description: Donnée ajoutée avec succès
+        '400':
+          description: Erreur dans les données fournies
+
+  /update/{id_country}/{date}:
+    put:
+      summary: Mettre à jour une donnée existante
+      description: Met à jour les informations pandémiques pour un pays à une date spécifique.
+      parameters:
+        - name: id_country
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: date
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+          description: Date au format YYYY-MM-DD
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                total_cases:
+                  type: integer
+                total_deaths:
+                  type: integer
+                new_cases:
+                  type: integer
+                new_deaths:
+                  type: integer
+                New_recovered:
+                  type: integer
+      responses:
+        '200':
+          description: Données mises à jour avec succès
+        '400':
+          description: Format de date invalide
+        '404':
+          description: Pays ou donnée non trouvée
+
+  /data/{id_country}/{date}:
+    delete:
+      summary: Supprimer une entrée
+      description: Supprime les données pandémiques d’un pays à une date donnée.
+      parameters:
+        - name: id_country
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: date
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+          description: Date au format YYYY-MM-DD
+      responses:
+        '200':
+          description: Donnée supprimée avec succès
+        '400':
+          description: Format de date invalide
+        '404':
+          description: Donnée non trouvée pour ce pays et cette date
+
+components:
+  schemas:
+    Country:
+      type: object
+      properties:
+        id_country:
+          type: integer
+        name:
+          type: string
+        continent:
+          type: string
+        population:
+          type: integer
+
+    PandemicData:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        id_country:
+          type: integer
+        total_cases:
+          type: integer
+        new_cases:
+          type: integer
+        total_deaths:
+          type: integer
+        new_deaths:
+          type: integer
+        total_recovered:
+          type: integer
+        active_cases:
+          type: integer
+        serious_critical:
+          type: integer
+        TrueConfirmed:
+          type: integer

@@ -1,3 +1,9 @@
 streamlit
 pandas
 matplotlib
+flask
+flask-restful
+flask-cors
+pandas
+sqlalchemy
+pymysql
