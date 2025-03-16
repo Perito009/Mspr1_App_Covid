@@ -8,7 +8,7 @@ import datetime
 API_URL = "http://127.0.0.1:5000"
 
 st.set_page_config(page_title="📊 Dashboard DOKVID", layout="wide")
-st.title("📊 Dashboard Interactif - Pandémies COVID")
+st.title("📊 DOKVID - Dashboard Interactif - Pandémies COVID")
 
 # 📌 Onglets : Dashboard | Gestion des données
 tabs = st.tabs(["📊 Dashboard", "⚙️ Gestion des données"])
